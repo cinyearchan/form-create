@@ -1,3 +1,3 @@
-import Sub from './component';
+import Sub from "./component"
 
-export default Sub;
+export default Sub

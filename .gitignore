@@ -66,3 +66,6 @@ typings/
 yarn.lock
 /index.html
 dist
+
+.idea
+.vscode

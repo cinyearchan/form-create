@@ -7,12 +7,12 @@
  * @FilePath      : /form-create2/packages/element-ui/babel.config.js
  */
 module.exports = {
-    presets: [
-        [
-            '@vue/cli-plugin-babel/preset',
-            {
-                useBuiltIns: false
-            }
-        ]
+  presets: [
+    [
+      "@vue/cli-plugin-babel/preset",
+      {
+        useBuiltIns: false
+      }
     ]
+  ]
 }

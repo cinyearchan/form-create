@@ -1,7 +1,6 @@
-import chalk from "chalk";
-import fs from "fs";
-import { projRoot } from "./paths";
-
+import chalk from "chalk"
+import fs from "fs"
+import { projRoot } from "./paths"
 
 export function yellow(str: string, isBold: boolean = false) {
   isBold ? console.log(chalk.bold.yellow(str)) : console.log(chalk.yellow(str))
@@ -24,9 +23,8 @@ export function errorAndExit(e) {
   process.exit(1)
 }
 
-
-export const targets = (dir: 'packages' | 'components' = 'packages') => {
-  const componentsAllPaths = Object.create(null);
+export const targets = (dir: "packages" | "components" = "packages") => {
+  const componentsAllPaths = Object.create(null)
   const uiFoldersPath = fs.readdirSync(dir).filter(uiFolderPath => {
     if (fs.statSync(`${projRoot}/${dir}/${uiFolderPath}`).isDirectory()) {
       return true
@@ -40,18 +38,20 @@ export const targets = (dir: 'packages' | 'components' = 'packages') => {
   //   }
   // })
 
-  if (dir === 'packages') {
+  if (dir === "packages") {
     const packagesFolderPath = []
     for (let index = 0; index < uiFoldersPath.length; index++) {
-      const uiPath = uiFoldersPath[index];
+      const uiPath = uiFoldersPath[index]
       if (!fs.statSync(`${projRoot}/${dir}/${uiPath}`).isDirectory()) {
-        continue;
+        continue
       }
       const pkg = require(`${projRoot}/${dir}/${uiPath}/package.json`)
-      fs.rmdirSync(`${projRoot}/${dir}/${uiPath}/dist`, { recursive: true });
+      fs.rmdirSync(`${projRoot}/${dir}/${uiPath}/dist`, { recursive: true })
       if (pkg.private || !pkg.buildFormCreateOptions) {
-        red(`\n info: ${projRoot}/${dir}/${uiPath}/package.json private is true or buildFormCreateOptions is not exists!`)
-        continue;
+        red(
+          `\n info: ${projRoot}/${dir}/${uiPath}/package.json private is true or buildFormCreateOptions is not exists!`
+        )
+        continue
       }
       packagesFolderPath.push(`${projRoot}/${dir}/${uiPath}`)
       if (packagesFolderPath.length) {
@@ -60,20 +60,26 @@ export const targets = (dir: 'packages' | 'components' = 'packages') => {
     }
   }
 
-  if (dir === 'components') {
+  if (dir === "components") {
     uiFoldersPath.forEach(uiPath => {
       const componentFolderPath = []
       const alen = fs.readdirSync(`${projRoot}/${dir}/${uiPath}`).length
       for (let index = 0; index < alen; index++) {
-        const comPath = fs.readdirSync(`${projRoot}/${dir}/${uiPath}`)[index];
-        if (!fs.statSync(`${projRoot}/${dir}/${uiPath}/${comPath}`).isDirectory()) {
-          continue;
+        const comPath = fs.readdirSync(`${projRoot}/${dir}/${uiPath}`)[index]
+        if (
+          !fs.statSync(`${projRoot}/${dir}/${uiPath}/${comPath}`).isDirectory()
+        ) {
+          continue
         }
         const pkg = require(`${projRoot}/${dir}/${uiPath}/${comPath}/package.json`)
-        fs.rmdirSync(`${projRoot}/${dir}/${uiPath}/${comPath}/dist`, { recursive: true });
+        fs.rmdirSync(`${projRoot}/${dir}/${uiPath}/${comPath}/dist`, {
+          recursive: true
+        })
         if (pkg.private || !pkg.buildFormCreateOptions) {
-          red(`\n info: ${projRoot}/${dir}/${uiPath}/${comPath}/package.json private is true or buildFormCreateOptions is not exists!`)
-          continue;
+          red(
+            `\n info: ${projRoot}/${dir}/${uiPath}/${comPath}/package.json private is true or buildFormCreateOptions is not exists!`
+          )
+          continue
         }
         componentFolderPath.push(`${projRoot}/${dir}/${uiPath}/${comPath}`)
       }
@@ -83,25 +89,35 @@ export const targets = (dir: 'packages' | 'components' = 'packages') => {
     })
   }
 
-
   return componentsAllPaths
 }
 
-
-export const getSingleComponentPaths = (dir: string = 'components', libname: string = '', comname: string = '') => {
+export const getSingleComponentPaths = (
+  dir: string = "components",
+  libname: string = "",
+  comname: string = ""
+) => {
   const fpath = Object.create(null)
   const _rootPath = dir
   const _libPath = libname
   const _compPath = comname
 
-  if (!fs.statSync(`${projRoot}/${_rootPath}/${_libPath}/${_compPath}`).isDirectory()) {
+  if (
+    !fs
+      .statSync(`${projRoot}/${_rootPath}/${_libPath}/${_compPath}`)
+      .isDirectory()
+  ) {
     return
   }
 
   const pkg = require(`${projRoot}/${_rootPath}/${_libPath}/${_compPath}/package.json`)
-  fs.rmdirSync(`${projRoot}/${_rootPath}/${_libPath}/${_compPath}/dist`, { recursive: true });
+  fs.rmdirSync(`${projRoot}/${_rootPath}/${_libPath}/${_compPath}/dist`, {
+    recursive: true
+  })
   if (pkg.private || !pkg.buildFormCreateOptions) {
-    red(`\n info: ${projRoot}/${_rootPath}/${_libPath}/${_compPath}/package.json private is true or buildFormCreateOptions is not exists!`)
+    red(
+      `\n info: ${projRoot}/${_rootPath}/${_libPath}/${_compPath}/package.json private is true or buildFormCreateOptions is not exists!`
+    )
     return
   }
   fpath[_libPath] = [`${projRoot}/${_rootPath}/${_libPath}/${_compPath}`]
@@ -109,7 +125,10 @@ export const getSingleComponentPaths = (dir: string = 'components', libname: str
   return fpath
 }
 
-export const getSinglePackagePaths = (dir: string = 'packages', libname: string = '') => {
+export const getSinglePackagePaths = (
+  dir: string = "packages",
+  libname: string = ""
+) => {
   const fpath = Object.create(null)
   const _rootPath = dir
   const _libPath = libname
@@ -119,9 +138,11 @@ export const getSinglePackagePaths = (dir: string = 'packages', libname: string 
   }
 
   const pkg = require(`${projRoot}/${_rootPath}/${_libPath}/package.json`)
-  fs.rmdirSync(`${projRoot}/${_rootPath}/${_libPath}/dist`, { recursive: true });
+  fs.rmdirSync(`${projRoot}/${_rootPath}/${_libPath}/dist`, { recursive: true })
   if (pkg.private || !pkg.buildFormCreateOptions) {
-    red(`\n info: ${projRoot}/${_rootPath}/${_libPath}/package.json private is true or buildFormCreateOptions is not exists!`)
+    red(
+      `\n info: ${projRoot}/${_rootPath}/${_libPath}/package.json private is true or buildFormCreateOptions is not exists!`
+    )
     return
   }
   fpath[_libPath] = [`${projRoot}/${_rootPath}/${_libPath}`]
@@ -133,7 +154,9 @@ export const getSinglePackagePaths = (dir: string = 'packages', libname: string 
 export const getFolderNames = (folder: string, uiFolder: string) => {
   return fs.readdirSync(`${folder}/${uiFolder}`).map(uiFolderPath => {
     if (fs.statSync(`${projRoot}/${folder}/${uiFolder}`).isDirectory()) {
-      fs.rmdirSync(`${projRoot}/${folder}/${uiFolder}/dist`, { recursive: true });
+      fs.rmdirSync(`${projRoot}/${folder}/${uiFolder}/dist`, {
+        recursive: true
+      })
       return `${uiFolder}/${uiFolderPath}`
     }
   })
