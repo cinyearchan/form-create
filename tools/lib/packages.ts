@@ -71,6 +71,7 @@ const _filter_current_url_ = (urls: Array<any>) => {
   urls.map(url => {
     const itemUrlLibName = url[0]
     let itemUrlLibsUrl = ""
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
     url[1].forEach((item, idx) => {
       const suffix = item.split("/").pop()
       if (suffix === itemUrlLibName) {
