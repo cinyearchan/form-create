@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import extend from "@form-create/utils/lib/extend"
 import { $set } from "@form-create/utils/lib/modify"
 import is, { hasProperty } from "@form-create/utils/lib/type"

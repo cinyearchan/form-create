@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import mergeProps from "@form-create/utils/lib/mergeprops"
 import unique from "@form-create/utils/lib/unique"
