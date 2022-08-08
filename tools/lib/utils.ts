@@ -39,7 +39,7 @@ export const targets = (dir: "packages" | "components" = "packages") => {
   // })
 
   if (dir === "packages") {
-    const packagesFolderPath = []
+    const packagesFolderPath: string[] = []
     for (let index = 0; index < uiFoldersPath.length; index++) {
       const uiPath = uiFoldersPath[index]
       if (!fs.statSync(`${projRoot}/${dir}/${uiPath}`).isDirectory()) {
@@ -62,7 +62,7 @@ export const targets = (dir: "packages" | "components" = "packages") => {
 
   if (dir === "components") {
     uiFoldersPath.forEach(uiPath => {
-      const componentFolderPath = []
+      const componentFolderPath: string[] = []
       const alen = fs.readdirSync(`${projRoot}/${dir}/${uiPath}`).length
       for (let index = 0; index < alen; index++) {
         const comPath = fs.readdirSync(`${projRoot}/${dir}/${uiPath}`)[index]

@@ -1,13 +1,13 @@
-import elmFormCreate from './core/index';
+import elmFormCreate from "./core/index"
 
-const FormCreate = elmFormCreate();
+const FormCreate = elmFormCreate()
 
-if (typeof window !== 'undefined') {
-    window.formCreate = FormCreate;
+if (typeof window !== "undefined") {
+  window.formCreate = FormCreate
 }
 
-const maker = FormCreate.maker;
+const maker = FormCreate.maker
 
-export {maker}
+export { maker }
 
-export default FormCreate;
+export default FormCreate

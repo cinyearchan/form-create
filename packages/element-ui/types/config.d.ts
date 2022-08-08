@@ -1,5 +1,5 @@
 import {FormData, VNodeRule} from "@form-create/core";
-import {ButtonProps, ValidateFieldCallback} from "element-plus";
+import {ButtonProps, FormValidateCallback} from "element-plus";
 import {Api} from "./index";
 
 type SizeObject = {
@@ -131,7 +131,7 @@ export interface ApiAttrs {
 
     validate(callback?: (callback?: (boolean: boolean, object: Object) => void) => void): Promise<any>;
 
-    validateField(field: string, callback?: ValidateFieldCallback): Promise<any>;
+    validateField(field: string, callback?: FormValidateCallback): Promise<any>;
 
     submitBtnProps(props: ButtonProps): void;
 

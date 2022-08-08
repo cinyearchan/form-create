@@ -1,49 +1,54 @@
 /**
  * 打包components文件
  */
-import type { Ora } from 'ora';
-import chalk from 'chalk';
-import ora from 'ora';
-import os from 'os';
-import execa from 'execa';
-import dayjs from 'dayjs';
+// import type { Ora } from "ora"
+// import chalk from "chalk"
+// import ora from "ora"
+import os from "os"
+import execa from "execa"
+import dayjs from "dayjs"
 
-function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
+// function sleep(ms) {
+//   return new Promise(resolve => {
+//     setTimeout(resolve, ms)
+//   })
+// }
 
-
-let spinner: Ora;
+// let spinner: Ora
 const build = async (target: string, comp: string, targetName: string) => {
-  dayjs().startOf('millisecond');
+  dayjs().startOf("millisecond")
   /// env 先写死
-  const env = 'production'
+  const env = "production"
   await execa(
-    'rollup',
+    "rollup",
     [
       `-c`,
-      '--environment',
+      "--environment",
       [
         `NODE_ENV:${env}`,
         `BUILD_TARGET:${targetName}`,
         `BUILD_TARGET_COMP:${comp}`,
         `BUILD_TYPE:component`,
         `BUILD_TARGET_PATH:${target}`
-      ].filter(Boolean).join(',')
+      ]
+        .filter(Boolean)
+        .join(",")
     ],
-    { stdio: 'inherit' }
-  );
-  console.log('build task time' + ' ' + dayjs().format('YYYY-MM-DD HH:mm:ss'))
+    { stdio: "inherit" }
+  )
+  console.log("build task time" + " " + dayjs().format("YYYY-MM-DD HH:mm:ss"))
 }
 
-
-const runParallel = async (maxConcurrency: number, source: string[], buildName: string, iteratorFn: Function) => {
-  const ret = []
-  const executing = []
+const runParallel = async (
+  maxConcurrency: number,
+  source: string[],
+  buildName: string,
+  iteratorFn: Function
+) => {
+  const ret: any[] = []
+  const executing: any[] = []
   for (const item of source) {
-    const comp = item.split('/').pop()
+    const comp = item.split("/").pop()
     const p = Promise.resolve().then(() => iteratorFn(item, comp, buildName))
     ret.push(p)
 
@@ -58,8 +63,8 @@ const runParallel = async (maxConcurrency: number, source: string[], buildName: 
   return Promise.all(ret)
 }
 
-const buildAll = async (comAllTargets) => {
-    await runParallel(os.cpus().length, comAllTargets[1], comAllTargets[0], build)
+const buildAll = async comAllTargets => {
+  await runParallel(os.cpus().length, comAllTargets[1], comAllTargets[0], build)
 }
 
 const createBuildComponents = async (cpaths: { [k: string]: any }) => {
