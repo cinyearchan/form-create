@@ -4,7 +4,7 @@
 		"sourceMap": true,
 		"allowUnreachableCode": true,
     "allowSyntheticDefaultImports": true,
-		"allowJs": true,
+		"allowJs": false,
 		"experimentalDecorators": true,
 		"moduleResolution": "node",
 		"noImplicitThis": true,
