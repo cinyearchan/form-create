@@ -1,12 +1,12 @@
-import {defineComponent} from 'vue';
+import { defineComponent } from "vue"
 
-const NAME = 'fcFragment';
+const NAME = "fcFragment"
 
 export default defineComponent({
-    name: NAME,
-    inheritAttrs: false,
-    props: ['vnode'],
-    render() {
-        return this.vnode;
-    }
+  name: NAME,
+  inheritAttrs: false,
+  props: ["vnode"],
+  render() {
+    return this.vnode
+  }
 })

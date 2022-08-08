@@ -1,17 +1,17 @@
-import {creatorFactory} from './creator';
+import { creatorFactory } from "./creator"
 
-const commonMaker = creatorFactory('');
+const commonMaker = creatorFactory("")
 
 export function create(type, field, title) {
-    let make = commonMaker('', field);
-    make._data.type = type;
-    make._data.title = title;
-    return make;
+  const make = commonMaker("", field)
+  make._data.type = type
+  make._data.title = title
+  return make
 }
 
 export default function makerFactory() {
-    return {
-        create,
-        factory: creatorFactory
-    };
+  return {
+    create,
+    factory: creatorFactory
+  }
 }
