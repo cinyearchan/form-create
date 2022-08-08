@@ -41,7 +41,7 @@ program
   )
   .option("-a,--all", "Build @form-create/[all]packages") /// 默认打包components和packages
   .option(
-    "-c, --components <ui-compnents...>",
+    "-c, --components <ui-components...>",
     "Build @form-create/component-<ui-package> package or packages array"
   ) // 打单独的组件
   .option(

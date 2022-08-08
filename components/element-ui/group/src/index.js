@@ -1,3 +1,3 @@
-import Group from './component';
+import Group from "./component"
 
-export default Group;
+export default Group

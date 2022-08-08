@@ -1,3 +1,3 @@
-import Frame from './component';
+import Frame from "./component"
 
-export default Frame;
+export default Frame

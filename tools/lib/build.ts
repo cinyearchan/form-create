@@ -101,7 +101,7 @@ async function createBuildTask(args: any) {
       )
       let _all_ = [...fixPaths]
       if (allPaths.length) {
-        allPaths.forEach(allp => {
+        allPaths.forEach((allp: string) => {
           const [name] = !allp.includes("/") ? [allp] : allp.split("/")
           const _p = getFolderNames("components", name)
           _all_ = [..._all_, ..._p]

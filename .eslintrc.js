@@ -26,6 +26,7 @@ module.exports = {
     "block-spacing": "error",
     "no-unused-vars": "warn",
     "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-empty-function": "off",
     "object-curly-spacing": "off",
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "prettier/prettier": "error"

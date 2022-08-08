@@ -1,3 +1,3 @@
-import Tree from './component';
+import Tree from "./component"
 
-export default Tree;
+export default Tree
