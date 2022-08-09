@@ -54,14 +54,14 @@ const exportName =
 const fileName = packageOptions.fileName || "index"
 const libName = packageOptions.name || pkg.name
 const version = pkg.version
-const isPackaegs = process.env.BUILD_TYPE === "packages"
+const isPackages = process.env.BUILD_TYPE === "packages"
 const UI_LIB = process.env.BUILD_TARGET
 const ExtendExternals = packageOptions.extendExternals || []
 const ExtendGlobal = packageOptions.extendGlobal || {}
 const isMult = packageOptions.isMulti
 
 const _banner = {
-  author: isPackaegs
+  author: isPackages
     ? `2018-${new Date().getFullYear()} ${
         pkg.author
       }\n * Github https://github.com/xaboy/form-create`
@@ -192,7 +192,7 @@ function createRollupPlugins(plugins, format) {
   /// commonjs
   rollupPlugins.push(commonjs())
   /// replace
-  if (isPackaegs) {
+  if (isPackages) {
     rollupPlugins.push(createReplacePlugin(format))
   }
 
